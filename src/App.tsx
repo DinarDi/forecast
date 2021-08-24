@@ -1,13 +1,19 @@
-import React from 'react';
+import React from "react";
+import { observer } from "mobx-react-lite";
+import { Redirect, Route, Switch } from "react-router-dom";
+import Search from "./components/Search";
+import Weather from "./components/Weather";
 
-const App = () => {
+const App = observer(() => {
   return (
     <div>
-      <h1>hello</h1>
+      <Switch>
+        <Route exact path="/" component={Search} />
+        <Route path="/weather" component={Weather} />
+        <Redirect to="/" />
+      </Switch>
     </div>
-  )
-}
-
-
+  );
+});
 
 export default App;

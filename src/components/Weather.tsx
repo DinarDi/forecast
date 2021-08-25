@@ -1,19 +1,13 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Container,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
+import { Button, Container, makeStyles, Typography } from "@material-ui/core";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import store from "../store/weather";
+import CurrentWeather from "./CurrentWeather";
+import FiveDayForecast from "./FiveDayForecast";
 
 const Weather: React.FC = observer(() => {
-  const { currentWeather, loading, error, errorText } = store;
+  const { loading, error, errorText } = store;
   const history = useHistory();
   const useStyles = makeStyles({
     container: {
@@ -30,9 +24,10 @@ const Weather: React.FC = observer(() => {
       justifyContent: "center",
       alignItems: "center",
       textAlign: "center",
+      flexDirection: "column",
     },
   });
-  const { container, btnBack, card, flex } = useStyles();
+  const { container, btnBack, flex } = useStyles();
 
   if (error) {
     return (
@@ -68,17 +63,10 @@ const Weather: React.FC = observer(() => {
             Loading...
           </Typography>
         ) : (
-          <Card elevation={7} className={card}>
-            <CardHeader title={currentWeather[0].name} subheader="DATA DATA" />
-            <CardContent>
-              <Typography variant="h5" component="h5">
-                Temperature: {currentWeather[0].main.temp}
-              </Typography>
-              <Typography variant="h5" component="h5">
-                Feels like: {currentWeather[0].main.feels_like}
-              </Typography>
-            </CardContent>
-          </Card>
+          <>
+            <CurrentWeather />
+            <FiveDayForecast />
+          </>
         )}
       </Container>
     </Container>

@@ -1,7 +1,8 @@
-import { Button, Container, makeStyles, Typography } from "@material-ui/core";
+import { Button, Container, Typography } from "@material-ui/core";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { useStyles } from "../hooks/useStyles";
 import store from "../store/weather";
 import CurrentWeather from "./CurrentWeather";
 import FiveDayForecast from "./FiveDayForecast";
@@ -9,25 +10,7 @@ import FiveDayForecast from "./FiveDayForecast";
 const Weather: React.FC = observer(() => {
   const { loading, error, errorText } = store;
   const history = useHistory();
-  const useStyles = makeStyles({
-    container: {
-      marginTop: "15px",
-    },
-    btnBack: {
-      marginBottom: "15px",
-    },
-    card: {
-      maxWidth: "400px",
-    },
-    flex: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      textAlign: "center",
-      flexDirection: "column",
-    },
-  });
-  const { container, btnBack, flex } = useStyles();
+  const { container, btnBack, flexColumn } = useStyles();
 
   if (error) {
     return (
@@ -57,7 +40,7 @@ const Weather: React.FC = observer(() => {
       >
         Back
       </Button>
-      <Container className={flex}>
+      <Container className={flexColumn}>
         {loading ? (
           <Typography variant="h1" component="h1">
             Loading...

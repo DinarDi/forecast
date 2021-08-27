@@ -44,20 +44,23 @@ class Weather {
     makeAutoObservable(this);
   }
 
-  fetchCurrentWeather = async (city: string) => {
+  fetchWeather = async (city: string) => {
     try {
       this.fiveDayForecast = [];
       this.loading = true;
       this.error = false;
       this.errorText = "";
       const response = await axios.get<IcurrentWeather>(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather`,
+        {
+          params: { q: city, units: "metric", appid: API_KEY },
+        }
       );
       const responseFive = await axios
         .get<IfiveDayForecastAPI>(
           `https://api.openweathermap.org/data/2.5/forecast?q=Moscow&appid=${API_KEY}`,
           {
-            params: { units: "metric" },
+            params: { q: city, units: "metric", appid: API_KEY },
           }
         )
         .then((resp) => resp.data.list);
@@ -71,26 +74,6 @@ class Weather {
       this.errorText = `${e}`;
     }
   };
-
-  // fetchFiveDaysForecast = async (city: string) => {
-  //   try {
-  //     this.fiveDayForecast = [];
-  //     const response = await axios
-  //       .get<IfiveDayForecastAPI>(
-  //         `https://api.openweathermap.org/data/2.5/forecast?q=Moscow&appid=${API_KEY}`,
-  //         {
-  //           params: { units: "metric" },
-  //         }
-  //       )
-  //       .then((resp) => resp.data.list);
-  //     for (let i = 0; i < response.length; i += 8) {
-  //       this.fiveDayForecast = [...this.fiveDayForecast, response[i]];
-  //     }
-  //     console.log(this.fiveDayForecast);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 }
 
 export default new Weather();

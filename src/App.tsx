@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Search from "./components/Search";
 import Weather from "./components/Weather";
 
-const App = observer(() => {
+const App: React.FC = observer(() => {
   return (
     <div>
       <Switch>

@@ -1,39 +1,19 @@
-import {
-  Button,
-  Container,
-  TextField,
-  makeStyles,
-  colors,
-} from "@material-ui/core";
+import { Button, Container, TextField } from "@material-ui/core";
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useStyles } from "../hooks/useStyles";
 import store from "../store/weather";
 
 const Search: React.FC = observer(() => {
-  const { fetchCurrentWeather, currentWeather } = store;
+  const { fetchWeather } = store;
   const history = useHistory();
   const [city, setCity] = useState<string>("");
-  const useStyles = makeStyles({
-    flex: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    innerContainer: {
-      marginTop: "35vh",
-      border: `2px solid ${colors.blueGrey[700]}`,
-      padding: "35px",
-    },
-    textFieldMargin: {
-      marginBottom: "15px",
-    },
-  });
   const { flex, innerContainer, textFieldMargin } = useStyles();
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetchCurrentWeather(city);
+    fetchWeather(city);
     history.push("/weather");
   };
 

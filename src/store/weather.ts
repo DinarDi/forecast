@@ -58,7 +58,7 @@ class Weather {
       );
       const responseFive = await axios
         .get<IfiveDayForecastAPI>(
-          `https://api.openweathermap.org/data/2.5/forecast?q=Moscow&appid=${API_KEY}`,
+          `https://api.openweathermap.org/data/2.5/forecast`,
           {
             params: { q: city, units: "metric", appid: API_KEY },
           }

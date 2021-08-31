@@ -18,7 +18,7 @@ const FiveDayForecast: React.FC = observer(() => {
   return (
     <Grid container className={rootGrid} spacing={2}>
       {fiveDayForecast.map((forecast) => (
-        <Grid item lg={2}>
+        <Grid key={forecast.dt_txt} item lg={2}>
           <Card elevation={7} className={cardFive}>
             <CardHeader title={forecast.dt_txt.split(" ")[0]} />
             <CardContent>

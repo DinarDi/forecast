@@ -40,4 +40,9 @@ export const useStyles = makeStyles({
     flexGrow: 1,
     justifyContent: "center",
   },
+  weatherImg: {
+    maxWidth: "350px",
+    height: "100px",
+    marginBottom: "10px",
+  },
 });

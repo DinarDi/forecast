@@ -1,37 +1,11 @@
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 import { API_KEY } from "../keys/key";
-
-interface Iweather {
-  main: string;
-  description: string;
-}
-
-interface Imain {
-  temp: number;
-  feels_like: number;
-}
-
-interface IcurrentWeather {
-  name: string;
-  weather: Iweather[];
-  main: Imain;
-}
-
-interface ImainFive {
-  temp_min: number;
-  temp_max: number;
-}
-
-interface IfiveDayForecast {
-  dt_txt: string;
-  main: ImainFive;
-  weather: Iweather[];
-}
-
-interface IfiveDayForecastAPI {
-  list: IfiveDayForecast[];
-}
+import {
+  IcurrentWeather,
+  IfiveDayForecast,
+  IfiveDayForecastAPI,
+} from "../types/types";
 
 class Weather {
   currentWeather: IcurrentWeather[] = [];
